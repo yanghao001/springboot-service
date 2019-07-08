@@ -14,28 +14,28 @@ Welcome<br/>
 </body>
 
 <script type="text/javascript">
-    var websocket = null;
+    var ws = null;
 
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8081/websocket");
+        ws = new WebSocket("ws://localhost:8081/websocket");
     }
     else {
         alert('Not support websocket')
     }
 
-    websocket.onerror = function () {
+    ws.onerror = function () {
         setMessageInnerHTML("error");
     };
 
-    websocket.onopen = function (event) {
+    ws.onopen = function (event) {
         setMessageInnerHTML("open");
     }
 
-    websocket.onmessage = function (event) {
+    ws.onmessage = function (event) {
         setMessageInnerHTML(event.data);
     }
 
-    websocket.onclose = function () {
+    ws.onclose = function () {
         setMessageInnerHTML("close");
     }
 
@@ -44,7 +44,7 @@ Welcome<br/>
      *
      * */
     window.onbeforeunload = function () {
-        websocket.close();
+        ws.close();
     }
 
     function setMessageInnerHTML(innerHTML) {
@@ -52,12 +52,12 @@ Welcome<br/>
     }
 
     function closeWebSocket() {
-        websocket.close();
+        ws.close();
     }
 
     function send() {
         var message = document.getElementById('text').value;
-        websocket.send(message);
+        ws.send(message);
     }
 </script>
 </html>
