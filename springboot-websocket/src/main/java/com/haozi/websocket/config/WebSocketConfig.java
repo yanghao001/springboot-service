@@ -12,7 +12,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 public class WebSocketConfig {
 
     /**
-     *  服务器节点注入
+     *  （1）端节点注入 （2）optional 编程端点
      * */
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {

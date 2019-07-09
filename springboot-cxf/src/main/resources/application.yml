@@ -1,0 +1,19 @@
+server:
+  port: 8180
+
+spring:
+  profiles:
+  application:
+    name: web-demo  # Service registers under this name
+
+  # kafka config
+  kafka:
+    bootstrap-servers: 192.168.1.243:9092
+    consumer:
+      group-id: web-demo
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+

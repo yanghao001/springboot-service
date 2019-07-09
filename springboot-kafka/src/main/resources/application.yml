@@ -1,0 +1,13 @@
+spring:
+  #kafka config
+  kafka:
+    bootstrap-servers: 192.168.1.243:9092
+    consumer:
+      group-id: springboot-kafka
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+server:
+  port: 8080
