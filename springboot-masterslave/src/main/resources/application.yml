@@ -1,0 +1,41 @@
+#spring properties
+spring:
+  profiles: local
+  application:
+    name: springboot-masterslave
+  datasource:
+    # master\u4E3B\u6570\u636E\u6E90
+    master:
+      url: jdbc:mysql://127.0.0.1:3306/cdot_business?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: c123456
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      initialSize: 5
+      minIdle: 2
+      maxActive: 20
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      logSlowSql: true
+
+    # slave\u4ECE\u6570\u636E\u6E90
+    slave:
+      url: jdbc:mysql://192.168.1.243:8066/cdot_anyue_business?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: c123456
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      initialSize: 5
+      minIdle: 2
+      maxActive: 20
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      logSlowSql: true
