@@ -38,7 +38,7 @@ public class NioApplicationTests {
                 buffer = ByteBuffer.wrap(StringUtils.hexStringToBytes(req));
                 byte[] by = StringUtils.hexStringToBytes(buffer.toString());
                 socketChannel.write(buffer);
-                buffer.flip();
+                buffer.flip(); // 由于写入，position位于最后位置，下面读，则需置0
                 log.info("向服务端发送消息2: " + StringUtils.bytesToHex(ByteUtils.decodeValue(buffer)));
                 buffer.clear();
 

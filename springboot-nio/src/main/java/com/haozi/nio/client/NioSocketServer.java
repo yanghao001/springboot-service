@@ -61,11 +61,11 @@ public class NioSocketServer {
                                 log.info("read data from channel");
                                 SocketChannel sc = (SocketChannel) s.channel();
                                 ByteBuffer buffer = ByteBuffer.allocate(1024);
-                                long bytesRead = sc.read(buffer);
+                                long bytesRead = sc.read(buffer); // position位置0读入
                                 if (bytesRead > 0) {
                                     byte[] data = new byte[buffer.position()];
-                                    buffer.flip();
-                                    buffer.get(data);
+                                    buffer.flip(); // position位于最后位置，此操作将position置0
+                                    buffer.get(data); // 将缓冲区数据写入data
                                     log.info("read data:{}", StringUtils.bytesToHexString(data));
                                     handle(sc, upgradeData, data);
                                 }
