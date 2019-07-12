@@ -37,6 +37,7 @@ public class KafkaProducer {
         return instance;
     }
 
+    @SuppressWarnings("unchecked")
     public Future<RecordMetadata> send(String topic, String key, String message) {
         ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, key, message);
         Future<RecordMetadata> result = kafkaTemplate.send(topic, key, message);
