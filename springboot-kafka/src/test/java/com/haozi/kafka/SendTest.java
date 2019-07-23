@@ -1,6 +1,7 @@
 package com.haozi.kafka;
 
 import com.haozi.kafka.message.KafkaProducer;
+import com.haozi.kafka.utils.GsonUtil;
 import com.haozi.kafka.utils.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,15 @@ public class SendTest {
         map.put("num1", 1);
         map.put("num2", 2);
         kafkaProducer.send(topic, "1111", JsonUtil.map2Json(map));
+    }
+
+    @Test
+    public void sendSetChargingProfile() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("OperationType", "SetChargingProfile");
+        params.put("ConnectorId", 1);
+        params.put("ChargingProfile", "11111");
+        kafkaProducer.send("S2D-OCPP16-REQ-TOPIC", "CP3211", GsonUtil.jsonString(params));
     }
 
 }
