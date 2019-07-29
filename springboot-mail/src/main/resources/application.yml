@@ -1,0 +1,14 @@
+spring:
+  mail:
+    host: smtp.qq.com
+    username: \u5496\u5561@qq.com
+    password: 123456
+    default-encoding: UTF-8
+    # \u8BBE\u7F6E\u8D85\u65F6\u65F6\u95F4
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000

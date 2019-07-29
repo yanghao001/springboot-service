@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>激活邮件模板</title>
+</head>
+<body>
+<p>尊敬的用户：您好！</p>
+感谢您的注册，请确保该操作是您本人所为, 点击下面的链接完成注册。<br/>
+<a href="#" th:href="@{http://localhost:8080/register/{id}(id=${id}) }">激活账号</a>
+</body>
+</html>
