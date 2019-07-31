@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: springboot-mongodb
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: admin
+  kafka:
+    bootstrap-servers: 192.168.1.243:9092
+    producer:
+      retries: 0
+      batch-size: 16384  # \u6BCF\u6B21\u6700\u5927\u7684\u53D1\u9001\u6D88\u606F\u91CF
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  # key value \u7684\u7F16\u7801\u65B9\u5F0F
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: springboot-mongodb
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# server config
+server:
+  port: 8081
