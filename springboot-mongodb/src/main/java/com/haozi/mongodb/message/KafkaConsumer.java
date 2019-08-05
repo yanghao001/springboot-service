@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 /**
@@ -54,35 +56,32 @@ public class KafkaConsumer {
             }
             log.info("[processMessage][params]{}", message);
             saveData(message);
-
         } catch (Exception e) {
             log.info("processMessage exception", e);
 
         }
     }
 
-    // 存储充电过程中充电数据
-    public void saveData(String message) {
+    /**
+     * 存储充电过程中充电数据
+     */
+    public void saveData(String message) throws ParseException {
         Map data = JsonUtil.json2Bean(message, Map.class);
         String operationType = (String) data.get("OperationType");
         if (ConstantConfig.D_REPORT_CHARGE_PROGRESS.equals(operationType)) {
-            String orderNumber = (String) data.get("OrderNumber");
-            String startTime = (String) data.get("StartTime");
-            String voltage = (String) data.get("Voltage");
-            String elecCurrent = (String) data.get("ElecCurrent");
+            int startTime = (int) data.get("StartTime");
             String soc = (String) data.get("Soc");
-            String temperature = (String) data.get("Temperature");
-
+            Double totalPower = (Double) data.get("TotalPower"); // 功率计算：功率 = 电量/时间
+            String connectorId = (String) data.get("ConnectorId");
+            String startChargeSeq = (String) data.get("StartChargeSeq");
             ChargeInfo chargeInfo = new ChargeInfo();
-            chargeInfo.setOrderNumber(orderNumber);
             chargeInfo.setStartTime(startTime);
-            chargeInfo.setVoltage(voltage);
-            chargeInfo.setElecCurrent(elecCurrent);
             chargeInfo.setSoc(soc);
-            chargeInfo.setTemperature(temperature);
+            chargeInfo.setTotalPower(totalPower);
+            chargeInfo.setDeviceNumber(connectorId);
 
-            if (orderNumber == null) {
-                log.info("orderNumber invalid");
+            if (startChargeSeq == null) {
+                log.info("startChargeSeq invalid");
                 return;
             }
 
@@ -97,10 +96,7 @@ public class KafkaConsumer {
                 log.info("exception", e);
             }
         }
-
-
     }
-
 
 
 }

@@ -31,16 +31,15 @@ public class MongodbApplicationTests {
     @Test
     public void insertChargeInfo() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(new Date());
+        long now = System.currentTimeMillis();
         Map<String, Object> map = new HashMap<>();
         map.put("OperationType", ConstantConfig.D_REPORT_CHARGE_PROGRESS);
-        map.put("OrderNumber", "123456");
-        map.put("StartTime", dateString);
-        map.put("Voltage", "5");
-        map.put("ElecCurrent", "100.0");
-        map.put("Soc", "100");
-        map.put("Temperature", "40");
-        kafkaTemplate.send(ConstantConfig.D2S_TOPIC, "test112233", JsonUtil.map2Json(map));
+        map.put("StartChargeSeq", "654321");
+        map.put("StartTime", (int) now);
+        map.put("Soc", "0");
+        map.put("TotalPower", "40");
+        map.put("ConnectorId", "test123456-A");
+        kafkaTemplate.send(ConstantConfig.D2S_TOPIC, "test123456", JsonUtil.map2Json(map));
         log.info("send message success!");
     }
 

@@ -3,6 +3,8 @@ package com.haozi.mongodb.model;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Data
 @Component
 public class ChargeInfo {
@@ -13,24 +15,9 @@ public class ChargeInfo {
     private String operationType;
 
     /**
-     * 充电订单
-     * */
-    private String orderNumber;
-
-    /**
      * 充电订单开始时间
      * */
-    private String startTime;
-
-    /**
-     *  充电电压
-     * */
-    private String voltage;
-
-    /**
-     * 充电电流
-     * */
-    private String elecCurrent;
+    private int startTime;
 
     /**
      *  电池电量
@@ -38,7 +25,12 @@ public class ChargeInfo {
     private String soc;
 
     /**
-     * 温度
+     * 充电量
      * */
-    private String temperature;
+    private Double totalPower;
+
+    /**
+     * 桩号
+     * */
+    private String deviceNumber;
 }
