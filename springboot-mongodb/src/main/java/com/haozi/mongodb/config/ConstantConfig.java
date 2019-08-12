@@ -29,6 +29,7 @@ public class ConstantConfig {
      *  Mongodb collection
      */
     public static final String MONGO_CHARGE_GRAPE_DATA = "chargeGraph";
+    public static final String MONGO_CHARGE_POWER_DATA = "chargePower";
 
 
     public static final Integer BASE_PARAMS_CODE = 1;
@@ -43,6 +44,7 @@ public class ConstantConfig {
     public static final String DROP_AND_STOP = "可降可停";
     public static final String DROP_AND_NO_STOP = "可降不可停";
     public static final String NO_DROP_AND_NO_STOP = "不可降不可停";
+    public static final String SUM_POWER = "总功率";
 
 
     /**

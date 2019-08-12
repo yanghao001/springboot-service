@@ -55,7 +55,7 @@ public class KafkaConsumer {
                 return;
             }
             log.info("[processMessage][params]{}", message);
-            saveData(message);
+            saveData(key, message);
         } catch (Exception e) {
             log.info("processMessage exception", e);
 
@@ -65,25 +65,21 @@ public class KafkaConsumer {
     /**
      * 存储充电过程中充电数据
      */
-    public void saveData(String message) throws ParseException {
+    public void saveData(String deviceNumber, String message) throws ParseException {
         Map data = JsonUtil.json2Bean(message, Map.class);
         String operationType = (String) data.get("OperationType");
         if (ConstantConfig.D_REPORT_CHARGE_PROGRESS.equals(operationType)) {
-            int startTime = (int) data.get("StartTime");
-            String soc = (String) data.get("Soc");
-            Double totalPower = (Double) data.get("TotalPower"); // 功率计算：功率 = 电量/时间
-            String connectorId = (String) data.get("ConnectorId");
-            String startChargeSeq = (String) data.get("StartChargeSeq");
+            int timestamp = (int) data.get("Timestamp");
+            Integer connectorId = (Integer) data.get("ConnectorId");
+            int transactionId = (int) data.get("TransactionId");
+            String voltage = (String) data.get("Voltage");
+            String current = (String) data.get("Current");
             ChargeInfo chargeInfo = new ChargeInfo();
-            chargeInfo.setStartTime(startTime);
-            chargeInfo.setSoc(soc);
-            chargeInfo.setTotalPower(totalPower);
-            chargeInfo.setDeviceNumber(connectorId);
-
-            if (startChargeSeq == null) {
-                log.info("startChargeSeq invalid");
-                return;
-            }
+            chargeInfo.setTimestamp(timestamp);
+            chargeInfo.setVoltage(voltage);
+            chargeInfo.setElecCurrent(current);
+            chargeInfo.setTransactionId(transactionId);
+            chargeInfo.setDeviceNumber(deviceNumber + "-" + connectorId);
 
             try {
                 if (!mongoTemplate.collectionExists(ConstantConfig.MONGO_CHARGE_GRAPE_DATA)) {

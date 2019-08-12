@@ -8,7 +8,8 @@ spring:
       host: localhost
       port: 27017
       database: admin
-        collectionName: chargeGraph
+
+  # kafka
   kafka:
     bootstrap-servers: 192.168.1.243:9092
     producer:
@@ -22,12 +23,24 @@ spring:
       enable-auto-commit: true
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  # datasource
   datasource:
-    url: jdbc:mysql://localhost:3306/cdot_mov?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.1.242:3306/abb_business?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: *
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 
+  # redis config
+  redis:
+    host: 192.168.1.242
+    port: 6379
+    pool:
+      max-active: 100
+      max-idle: 20
+      max-wait: 30000
+
+# mybatis config
 mybatis:
   mapper-locations: classpath:/com.haozi.mongodb.mapper/*.xml
   config-location: classpath:/mybatis-config.xml
