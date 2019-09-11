@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haozi.mongodb.mapper.DeviceMapper">
+    <!-- 查询枪所处状态 -->
+    <select id="findAvailableByDeviceNumber" parameterType="String">
+        SELECT
+            d.status AS status
+        FROM abb_device_port AS d
+        WHERE d.is_del=0 AND d.device_number=#{deviceNumber} LIMIT 1
+    </select>
+
+    <!-- 查询桩所属站点信息 -->
+    <select id="findDeviceInfoByDeviceNumber" parameterType="String" resultType="com.haozi.mongodb.model.DeviceInfo">
+        SELECT
+            sg.name AS stationName,
+            sc.capacity AS 	capacity,
+            sc.control_ratio AS controlRatio,
+            sc.reduce_ratio AS reduceRatio,
+            sc.max_ctrl_ratio AS maxCtrlRatio,
+            sc.min_ctrl_ratio AS minCtrlRatio
+        FROM abb_device_port AS d
+        LEFT JOIN abb_station AS sg ON d.station_id=sg.id
+        LEFT JOIN abb_station_control AS sc ON sg.control_id=sc.id
+        WHERE d.device_number=#{deviceNumber} AND sg.control_type=2 LIMIT 1
+    </select>
+</mapper>
