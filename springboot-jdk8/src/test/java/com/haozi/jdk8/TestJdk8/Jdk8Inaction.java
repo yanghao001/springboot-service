@@ -6,11 +6,16 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @author hao.yang
@@ -100,7 +105,6 @@ public class Jdk8Inaction {
                 .filter(i -> i % 2 == 0)
                 .distinct()
                 .forEach(System.out::println);
-
     }
 
     @Test
@@ -130,6 +134,65 @@ public class Jdk8Inaction {
                 new Dish("salmon", false, 450, Dish.Type.FISH));
         List<Integer> dishNameLengths = menu.stream().map(Dish::getName).map(String::length).collect(Collectors.toList());
         System.out.println("打印姓名长度：" + dishNameLengths);
+    }
+
+    /**
+     * 文档读出不重复字符数
+     */
+    @Test
+    public void testStream3() {
+        long uniqueWords = 0;
+        try (Stream<String> lines = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())) {
+            uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(""))) // 转化stream流
+                    .distinct()  // 去除重复
+                    .count(); // 计数
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("unique words:" + uniqueWords);
+    }
+
+
+    /**
+     * 斐波拉契数列1
+     */
+    @Test
+    public void printFibonacci() {
+        Stream.iterate(new int[]{0, 1},
+                t -> new int[]{t[1], t[0] + t[1]})
+                .limit(20)
+                .map(t -> t[0])
+                .forEach(System.out::println);
+    }
+
+    /**
+     * 斐波拉契数列2
+     */
+    @Test
+    public void printFibonacci2() {
+        IntSupplier fib = new IntSupplier() {
+            private int previous = 0;
+            private int current = 1;
+            @Override
+            public int getAsInt() {
+                int oldPrevious = this.previous;
+                int nextValue = this.previous + this.current;
+                this.previous = current;
+                this.current = nextValue;
+                return oldPrevious;
+            }
+        };
+        IntStream.generate(fib).limit(10).forEach(System.out::println);
+    }
+
+    /**
+     * 随机数
+     */
+    @Test
+    public void printRandom() {
+        Stream.generate(Math::random)
+                .limit(10)
+                .forEach(System.out::println);
     }
 
 
