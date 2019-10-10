@@ -28,11 +28,11 @@ public class AlgorithmTest {
 
         int lastExchangeIndex = 0;
         int temp = 0;
-        int sortBorder = b.length -1;
-        for (int i = 0; i < b.length -1; i++) {
+        int sortBorder = b.length - 1;
+        for (int i = 0; i < b.length - 1; i++) {
             boolean isSorted = true;
             for (int j = 0; j < sortBorder; j++) {
-                if (b[j] < b[j+1]) {
+                if (b[j] < b[j + 1]) {
                     temp = b[j];
                     b[j] = b[j + 1];
                     b[j + 1] = temp;
@@ -58,7 +58,26 @@ public class AlgorithmTest {
      */
     @Test
     public void insertion() {
+        int[] arr = {3, 6, 4, 2, 9, 10, 11};
+        int[] sort = insertionSort(arr);
+        Arrays.stream(sort).forEach(System.out::println);
+    }
 
+    public static int[] insertionSort(int[] arr) {
+        int i, j, temp, len = arr.length;
+
+        // 从第2个元素开始，和前面有序的数列中的元素依次进行比较，直到找到小于它的位置
+        for (i = 1; i < len; i++) {
+            temp = arr[i];
+
+            // 最多和前面的i-1个数进行比较
+            for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
+                arr[j + 1] = arr[j]; // 如果arr[j]>arr[i]，则后移一个位置
+            }
+            // 如果arr[j] <= arr[i]，则将arr[i]插入到j+1的位置，当前这个位置正好有空位，因为后面比arr[i]大的元素都后移了一个位置
+            arr[j + 1] = temp;
+        }
+        return arr;
     }
 
     /**
@@ -66,8 +85,8 @@ public class AlgorithmTest {
      */
     @Test
     public void quick() {
-        int[] arr = new int[] {4,7,6,5,3,2,10,1};
-        arr = quickSort(arr, 0, arr.length-1);
+        int[] arr = new int[]{4, 7, 6, 5, 3, 2, 10, 1};
+        arr = quickSort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -90,17 +109,17 @@ public class AlgorithmTest {
         int left = startIndex;
         int right = endIndex;
 
-        while( left != right) {
+        while (left != right) {
             // 控制right指针比较并左移
-            while(left<right && arr[right] > pivot){
+            while (left < right && arr[right] > pivot) {
                 right--;
             }
             // 控制left指针比较并右移
-            while( left<right && arr[left] <= pivot) {
+            while (left < right && arr[left] <= pivot) {
                 left++;
             }
             // 交换left和right指向的元素
-            if(left<right) {
+            if (left < right) {
                 int p = arr[left];
                 arr[left] = arr[right];
                 arr[right] = p;
@@ -121,6 +140,7 @@ public class AlgorithmTest {
      */
     @Test
     public void choose() {
+
 
     }
 
@@ -149,5 +169,27 @@ public class AlgorithmTest {
     public void count() {
 
     }
+
+    /**
+     * 二分法
+     */
+    @Test
+    public int biSearch(int[] array, int a) {
+        int lo = 0;
+        int hi = array.length - 1;
+        int mid;
+        while (lo <= hi) {
+            mid = (lo + hi) / 2;
+            if (array[mid] == a) {
+                return mid + 1;
+            } else if (array[mid] < a) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return -1;
+    }
+
 
 }
