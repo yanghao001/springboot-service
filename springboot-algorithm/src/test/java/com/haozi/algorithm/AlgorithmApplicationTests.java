@@ -1,11 +1,15 @@
 package com.haozi.algorithm;
 
+import com.haozi.algorithm.model.TreeNode;
+import com.haozi.algorithm.model.TreeRoot;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -222,5 +226,257 @@ public class AlgorithmApplicationTests {
             merge(a, start, mid, end); // 合并
         }
     }
+
+    /**
+     * 静态二叉树
+     */
+    @Test
+    public void TreeTest() {
+        //根节点-->10
+        TreeNode treeNode1 = new TreeNode(10);
+
+        //左孩子-->9
+        TreeNode treeNode2 = new TreeNode(9);
+
+        //右孩子-->20
+        TreeNode treeNode3 = new TreeNode(20);
+
+        //20的左孩子-->15
+        TreeNode treeNode4 = new TreeNode(15);
+
+        //20的右孩子-->35
+        TreeNode treeNode5 = new TreeNode(35);
+
+        // 构建二叉树
+        // 根节点下2，3子节点
+        treeNode1.setLeftNode(treeNode2);
+        treeNode1.setRightNode(treeNode3);
+
+        // 3节点下4，5子节点
+        treeNode3.setLeftNode(treeNode4);
+        treeNode3.setRightNode(treeNode5);
+
+    }
+
+    /**
+     * 先序遍历：根-左-右
+     */
+    public void preTraverseTree(TreeNode rootTreeNode) {
+        if (rootTreeNode != null) {
+            System.out.println(rootTreeNode.getValue()); // 根
+            preTraverseTree(rootTreeNode.getLeftNode()); // 左
+            preTraverseTree(rootTreeNode.getRightNode()); // 右
+        }
+    }
+
+    /**
+     * 中序遍历： 左-根-右
+     *
+     * @param rootTreeNode 根节点
+     */
+    public void inTraverseTree(TreeNode rootTreeNode) {
+        if (rootTreeNode != null) {
+            inTraverseTree(rootTreeNode.getLeftNode()); // 左
+            System.out.println(rootTreeNode.getValue()); // 根
+            inTraverseTree(rootTreeNode.getRightNode()); // 右
+        }
+    }
+
+    /**
+     * 后序遍历： 左-右-根
+     *
+     * @param rootTreeNode 根节点
+     */
+    public void afterTraverseTree(TreeNode rootTreeNode) {
+        if (rootTreeNode != null) {
+            afterTraverseTree(rootTreeNode.getLeftNode()); // 左
+            afterTraverseTree(rootTreeNode.getRightNode()); // 右
+            System.out.println(rootTreeNode.getValue()); // 根
+        }
+    }
+
+    /**
+     * 二叉树创建
+     */
+    @Test
+    public void dynamicTest() {
+        int[] arr = {3, 2, 1, 4, 5};
+        // 动态创建树
+        TreeRoot root = new TreeRoot();
+        for (int value : arr) {
+            dynamicCreateTree(root, value);
+        }
+
+        System.out.println("先序遍历");
+        preTraverseTree(root.getTreeroot());
+        System.out.println("中序遍历");
+        inTraverseTree(root.getTreeroot());
+
+        int height = getHeight(root.getTreeroot());
+        System.out.println("height=" + height);
+    }
+
+    /**
+     * 动态创建二叉树
+     *
+     * @param treeRoot 根节点
+     * @param value    节点的值
+     */
+    public void dynamicCreateTree(TreeRoot treeRoot, int value) {
+
+        // 1. 如果根为空（第一次访问），将第一个值作为根节点
+        if (treeRoot.getTreeroot() == null) {
+            TreeNode treeNode = new TreeNode(value);
+            treeRoot.setTreeroot(treeNode);
+        } else {
+            // 2.当前根
+            TreeNode tempRoot = treeRoot.getTreeroot();
+            while (tempRoot != null) {
+                // 2.1 当前值大于根值，往右边走
+                if (value > tempRoot.getValue()) {
+                    // 2.1.0 右边没有根，则插入
+                    if (tempRoot.getRightNode() == null) {
+                        tempRoot.setRightNode(new TreeNode(value));
+                        return;
+                    } else {  // 2.1.1 右边有根，到树根右边
+                        tempRoot = tempRoot.getRightNode();
+                    }
+
+                } else { // 2.2 当前值小于根值，向左走
+                    // 2.2.0 左边没有根，直接插入
+                    if (tempRoot.getLeftNode() == null) {
+                        tempRoot.setLeftNode(new TreeNode(value));
+                        return;
+                    } else { // 2.2.1 左边有根，到根左边
+                        tempRoot = tempRoot.getLeftNode();
+                    }
+                }
+            }
+        }
+    }
+
+    public static int getHeight(TreeNode treeNode) {
+        if (treeNode == null) {
+            return 0;
+        } else {
+            // 1. 左边的子树深度
+            int left = getHeight(treeNode.getLeftNode());
+            // 2. 右边的子树深度
+            int right = getHeight(treeNode.getRightNode());
+
+            int max = left;
+            if (right > max) {
+                max = right;
+            }
+            return max + 1;
+        }
+    }
+
+    @Test
+    public void test8() {
+        List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+        numbers.stream().map(i -> i * i).forEach(System.out::println);
+    }
+
+
+    /**
+     * 测试string的不可变性
+     */
+    @Test
+    public void testString() {
+        String str = "abs -cdi45";
+        String str2 = str.trim();
+        System.out.println(str2); // 空格未去除，String不可变，实质String为final
+    }
+
+    @Test
+    public void transfer() {
+        System.out.println(new Date().toInstant().getEpochSecond());
+    }
+
+    @Test
+    public void testTime() throws ParseException {
+        String time = "2019-11-02 08:38:57";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        int timestamp = (int) sdf.parse(time).getTime();
+//        int timestamp = sdf.parse(time).getTime() / 1000;
+        int timestamps = (int) (sdf.parse(time).getTime() / 1000);
+        System.out.println("timestamp:" + timestamps);
+    }
+
+    @Test
+    public void UTCToLocalTime() {
+        String utcTime = "2019-06-14 09:37:50.788";
+        String utcTimePatten = "yyyy-MM-dd HH:mm:ss.SSSXXX";
+        String localTimePatten = "yyyy-MM-dd HH:mm:ss.SSS";
+        String localTime = "2019-11-07 10:52:43";
+        Date time = localToUTC(localTime);
+        System.out.println(time);
+        System.out.println(utcToLocal(utcTime, "8"));
+    }
+
+    /**
+     * Description: 本地时间转化为UTC时间
+     *
+     * @param localTime
+     * @return
+     */
+    public static Date localToUTC(String localTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date localDate = null;
+        try {
+            localDate = sdf.parse(localTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long localTimeInMillis = localDate.getTime();
+        /** long时间转换成Calendar */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(localTimeInMillis);
+        /** 取得时间偏移量 */
+        int zoneOffset = calendar.get(java.util.Calendar.ZONE_OFFSET);
+        /** 取得夏令时差 */
+        int dstOffset = calendar.get(java.util.Calendar.DST_OFFSET);
+        /** 从本地时间里扣除这些差量，即可以取得UTC时间*/
+        calendar.add(java.util.Calendar.MILLISECOND, -(zoneOffset + dstOffset));
+        /** 取得的时间就是UTC标准时间 */
+        Date utcDate = new Date(calendar.getTimeInMillis());
+        return utcDate;
+    }
+
+    /**
+     * Description:UTC时间转化为本地时间
+     *
+     * @param utcTime
+     * @return
+     */
+    public static Date utcToLocal(String utcTime, String timeZone) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date utcDate = null;
+        try {
+            utcTime = utcTime + "+" + timeZone;
+            utcDate = sdf.parse(utcTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        sdf.setTimeZone(TimeZone.getDefault());
+        Date locatlDate = null;
+        String localTime = sdf.format(utcDate.getTime());
+        try {
+            locatlDate = sdf.parse(localTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return locatlDate;
+    }
+
+    @Test
+    public void testDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        System.out.println(sdf.format(date));
+    }
+
 
 }
