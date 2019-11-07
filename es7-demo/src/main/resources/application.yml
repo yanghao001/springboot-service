@@ -1,0 +1,11 @@
+
+# Spring properties
+server:
+  port: 8930
+spring:
+  #  profiles: local
+  application:
+    name: charge-logTransfer-service
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9200
