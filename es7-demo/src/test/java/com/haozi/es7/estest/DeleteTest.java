@@ -1,4 +1,4 @@
-package com.haozi.es7.ESTest;
+package com.haozi.es7.estest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
@@ -9,7 +9,6 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
@@ -20,13 +19,13 @@ import java.io.IOException;
  */
 @Slf4j
 @SpringBootTest
-public class DeleteData {
+public class DeleteTest {
 
     /**
      * 删除数据（索引删除）
      */
     @Test
-    public void delete() throws IOException {
+    private void delete() throws IOException {
         // 1. 初始化
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(new HttpHost("192.168.1.240", 9200, "http")));

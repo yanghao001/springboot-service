@@ -1,4 +1,4 @@
-package com.haozi.es7.ESTest;
+package com.haozi.es7.estest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
@@ -10,7 +10,6 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,14 +23,14 @@ import java.util.Map;
  */
 @Slf4j
 @SpringBootTest
-public class addData {
+public class AddTest {
 
     /**
      * TranportClient
      * 添加索引数据
      */
     @Test
-    public void index() {
+    private void index() {
         try {
             // 1. 初始化
             RestHighLevelClient client = new RestHighLevelClient(

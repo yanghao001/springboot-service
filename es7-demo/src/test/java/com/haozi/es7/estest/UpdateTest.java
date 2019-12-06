@@ -1,4 +1,4 @@
-package com.haozi.es7.ESTest;
+package com.haozi.es7.estest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
@@ -25,13 +25,13 @@ import java.util.Map;
  */
 @Slf4j
 @SpringBootTest
-public class UpdateData {
+public class UpdateTest {
 
     /**
      * 更新数据 以json格式
      */
     @Test
-    public void updateJson() throws IOException {
+    private void updateJson() throws IOException {
         // 初始化
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(new HttpHost("192.168.1.240", 9200, "http")));
@@ -56,7 +56,7 @@ public class UpdateData {
      * 更新数据 以doc格式
      */
     @Test
-    public void updateDoc() throws IOException {
+    private void updateDoc() throws IOException {
         // 初始化
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(new HttpHost("192.168.1.240", 9200, "http")));
@@ -76,7 +76,7 @@ public class UpdateData {
      * 更新数据 以map to json格式
      */
     @Test
-    public void updateMapTOJson() throws IOException {
+    private void updateMapTOJson() throws IOException {
         // 初始化
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(new HttpHost("192.168.1.240", 9200, "http")));
@@ -97,7 +97,7 @@ public class UpdateData {
      * 更新插入数据
      * */
     @Test
-    public void updateInsert() throws IOException {
+    private void updateInsert() throws IOException {
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(new HttpHost("192.168.1.240", 9200, "http")));
         String jsonString = "{" +
