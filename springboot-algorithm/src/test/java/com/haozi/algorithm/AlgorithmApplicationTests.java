@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -472,11 +473,58 @@ public class AlgorithmApplicationTests {
     }
 
     @Test
-    public void testDate() {
+    public void testDate() throws ParseException {
+        Date date = new Date(1503544630000L);  // 对应的北京时间是2017-08-24 11:17:10
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        System.out.println(sdf.format(date));
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        SimpleDateFormat bjSdf = new SimpleDateFormat("yyyy-MM-dd HH:00:00");     // 北京
+        bjSdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));  // 设置北京时区
+
+        SimpleDateFormat tokyoSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  // 东京
+        tokyoSdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));  // 设置东京时区
+
+        SimpleDateFormat londonSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 伦敦
+        londonSdf.setTimeZone(TimeZone.getTimeZone("Europe/London"));  // 设置伦敦时区
+
+        System.out.println("毫秒数:" + date.getTime() + ", UTC时间:" + sdf.format(date));
+        System.out.println("毫秒数:" + date.getTime() + ", 北京时间:" + bjSdf.format(date));
+        System.out.println("毫秒数:" + date.getTime() + ", 东京时间:" + tokyoSdf.format(date));
+        System.out.println("毫秒数:" + date.getTime() + ", 伦敦时间:" + londonSdf.format(date));
+        String time = "2019-11-22 14:08:12";
+        System.out.println("test" + sdf.parse(time));
     }
 
+
+    @Test
+    public void testStringBuilder() {
+        String tmpConnection = String.format("<", "111", ",", "2222", ">");
+        System.out.println("=====" + tmpConnection);
+    }
+
+    @Test
+    public void testConvertTime() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String startTimeStr = "2019-10-30 23:54:00";
+        String stopTimeStr = "2019-10-31 00:54:00";
+        long startTime = sdf.parse(startTimeStr).getTime();
+        long stopTime = sdf.parse(stopTimeStr).getTime();
+        long off = stopTime - startTime;
+        int startMin = (int) (startTime / 60000);
+        int stopMin = (int) (stopTime / 60000);
+        System.out.println("startTime:" + startTime);
+        System.out.println("stopTime:" + stopTime);
+        System.out.println("off:" + (int) off/60000);
+
+        // 求小时
+        // 本地开始时间
+        Date date = sdf.parse(startTimeStr);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        System.out.println("hour=" + hour);
+        System.out.println("minute=" + minute);
+    }
 
 }
