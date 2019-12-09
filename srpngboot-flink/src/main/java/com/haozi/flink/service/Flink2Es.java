@@ -15,16 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ES6
+ * flink数据写入ES6
  * @author hao.yang
  * @date 2019/9/24
  */
 public class Flink2Es {
 
-    /**
-     * flink数据写入Es
-     *
-     * */
     public static void flinkToES() {
         Map<String, String> config = new HashMap<>();
         config.put("cluster.name", "my-cluster-name");
@@ -32,7 +28,6 @@ public class Flink2Es {
 
         List<HttpHost> httpHosts = new ArrayList<>();
         httpHosts.add(new HttpHost("127.0.0.1", 9300, "http"));
-        httpHosts.add(new HttpHost("10.2.3.1", 9300, "http"));
         DataStream<String> input = null;
 
         // ES6 特有构建方式

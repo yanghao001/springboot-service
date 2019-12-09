@@ -1,0 +1,90 @@
+[2019-07-31 10:37:22.591][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 14224 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:37:22.593][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:37:22.976][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.701 seconds (JVM running for 1.173)
+[2019-07-31 10:45:52.215][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 14304 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:45:52.218][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:45:52.600][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.68 seconds (JVM running for 1.117)
+[2019-07-31 10:45:52.601][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:46:37.593][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 17524 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:46:37.596][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:46:37.962][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.681 seconds (JVM running for 1.126)
+[2019-07-31 10:46:37.964][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:46:37.964][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:46:48.761][INFO][c.h.i.s.Server]:写入数据为：576564204a756c2033312031303a34363a34382043535420323031393a2068656c6c6f20776f726c640000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+[2019-07-31 10:46:49.107][INFO][c.h.i.s.Server]:IOException
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.haozi.iodemo.server.Server$1.run(Server.java:49)
+	at java.lang.Thread.run(Thread.java:748)
+[2019-07-31 10:47:33.874][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 13516 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:47:33.876][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:47:34.255][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.702 seconds (JVM running for 1.146)
+[2019-07-31 10:47:34.257][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:47:34.257][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:47:38.975][INFO][c.h.i.s.Server]:写入数据为：576564204a756c2033312031303a34373a33382043535420323031393a2068656c6c6f20776f726c640000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+[2019-07-31 10:47:39.312][INFO][c.h.i.s.Server]:IOException
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.haozi.iodemo.server.Server$1.run(Server.java:49)
+	at java.lang.Thread.run(Thread.java:748)
+[2019-07-31 10:47:56.670][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 14188 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:47:56.679][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:47:57.026][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.671 seconds (JVM running for 1.12)
+[2019-07-31 10:47:57.027][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:47:57.027][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:48:01.343][INFO][c.h.i.s.Server]:写入数据为：576564204a756c2033312031303a34383a30312043535420323031393a2068656c6c6f20776f726c64000000000000000000
+[2019-07-31 10:48:01.693][INFO][c.h.i.s.Server]:IOException
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.haozi.iodemo.server.Server$1.run(Server.java:49)
+	at java.lang.Thread.run(Thread.java:748)
+[2019-07-31 10:48:24.339][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 23032 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:48:24.349][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:48:24.714][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.661 seconds (JVM running for 1.093)
+[2019-07-31 10:48:24.715][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:48:24.715][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:48:28.671][INFO][c.h.i.s.Server]:写入数据为：576564204a756c2033312031303a34383a32382043535420323031393a2068656c6c6f20776f726c64000000000000000000
+[2019-07-31 10:48:29.011][INFO][c.h.i.s.Server]:IOException
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.haozi.iodemo.server.Server$1.run(Server.java:49)
+	at java.lang.Thread.run(Thread.java:748)
+[2019-07-31 10:48:45.193][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 11784 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:48:45.196][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:48:45.560][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.662 seconds (JVM running for 1.082)
+[2019-07-31 10:48:45.562][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:48:45.562][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:48:55.128][INFO][c.h.i.s.Server]:写入数据为：576564204a756c2033312031303a34383a35352043535420323031393a2068656c6c6f20776f726c64000000000000000000
+[2019-07-31 10:48:55.477][INFO][c.h.i.s.Server]:IOException
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.haozi.iodemo.server.Server$1.run(Server.java:49)
+	at java.lang.Thread.run(Thread.java:748)
+[2019-07-31 10:50:33.933][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 6036 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:50:33.944][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:50:34.292][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.674 seconds (JVM running for 1.1)
+[2019-07-31 10:50:34.294][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:50:34.294][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:51:29.969][INFO][c.h.i.IodemoApplication]:Starting IodemoApplication on DESKTOP-KKTE7O5 with PID 21984 (D:\hub\springboot-service\springboot-iodemo\target\classes started by haozi in D:\hub\springboot-service)
+[2019-07-31 10:51:29.971][INFO][c.h.i.IodemoApplication]:The following profiles are active: dev
+[2019-07-31 10:51:30.325][INFO][c.h.i.IodemoApplication]:Started IodemoApplication in 0.657 seconds (JVM running for 1.078)
+[2019-07-31 10:51:30.327][INFO][c.h.i.MyApplicationRunner]:MyApplicationRunner start
+[2019-07-31 10:51:30.327][INFO][c.h.i.s.Server]:init server success
+[2019-07-31 10:51:35.387][INFO][c.h.i.s.Server]:写入数据为：576564204a756c2033312031303a35313a33352043535420323031393a2068656c6c6f20776f726c64000000000000000000
+[2019-07-31 10:51:35.719][INFO][c.h.i.s.Server]:IOException
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.haozi.iodemo.server.Server$1.run(Server.java:46)
+	at java.lang.Thread.run(Thread.java:748)

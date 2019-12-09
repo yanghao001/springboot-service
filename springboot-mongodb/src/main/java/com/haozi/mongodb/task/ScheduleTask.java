@@ -38,7 +38,7 @@ public class ScheduleTask {
     /**
      * 每间隔十分钟查询一次mongo数据
      */
-    @Scheduled(initialDelay = 0, fixedRate = 600000)
+    @Scheduled(initialDelay = 0, fixedRate = 6000)
     public void queryData() {
         log.info("query data for every 10 min");
         int endTime = (int) System.currentTimeMillis();

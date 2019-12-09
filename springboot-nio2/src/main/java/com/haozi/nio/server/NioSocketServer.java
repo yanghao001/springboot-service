@@ -16,7 +16,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * NIO 多线程下文件下载（关键点在于selectionKey取消）
+ * NIO 多线程下文件下载
+ * 关注点1： IO操作通道关闭，selectionKey cancel
+ * 关注点2： 沾包处理
  *
  * @author hao.yang
  * @date 2019/7/11
@@ -34,9 +36,10 @@ public class NioSocketServer {
     }
 
     public void server() {
+        ServerSocketChannel serverSocketChannel = null;
         try {
             pool = Executors.newFixedThreadPool(5);
-            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+            serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.socket().bind(new InetSocketAddress(8005));
             Selector selector = Selector.open();
@@ -72,15 +75,19 @@ public class NioSocketServer {
                         log.error("IOException", e);
                         key.cancel();
                         key.channel().close();
+                        break;
                     }
                 }
-
             }
-
         } catch (IOException e) {
             log.info("IOException", e);
+        } finally {
+            try {
+                serverSocketChannel.close();
+            } catch (IOException e) {
+                log.error("IOException", e);
+            }
         }
-
     }
 
     public static class Handler implements Runnable {
@@ -135,18 +142,18 @@ public class NioSocketServer {
                 log.info("write bytes len={}", len);
             }
             log.info("upgrade[RESP]{}", StringUtils.bytesToHexString(upgradeData));
-
         }
 
         /**
          * 读入文件内容
          */
-        public byte[] readFile() {
+        public byte[] readFile() throws IOException {
             byte[] data = null;
+            FileInputStream fis = null;
             try {
                 ByteBuffer buffer = ByteBuffer.allocate(100 * 1024);
                 String localPath = "D:\\file\\f1_ucosii.bin";
-                FileInputStream fis = new FileInputStream(localPath);
+                fis = new FileInputStream(localPath);
                 FileChannel fileChannel = fis.getChannel();
                 int count = fileChannel.read(buffer);
                 if (count <= 0) {
@@ -154,10 +161,12 @@ public class NioSocketServer {
                 }
                 buffer.flip();
                 data = ByteUtils.decodeValue(buffer);
-                log.info("load file:{}", StringUtils.bytesToHex(data));
+                log.info("load file:{}", StringUtils.bytesToHexString(data));
                 buffer.clear();
             } catch (IOException e) {
                 log.info("IOExeception", e);
+            } finally {
+                fis.close();
             }
             return data;
         }

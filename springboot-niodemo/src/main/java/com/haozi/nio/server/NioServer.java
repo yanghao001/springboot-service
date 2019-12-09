@@ -65,6 +65,7 @@ public class NioServer implements Runnable {
                                     while ((len = sc.read(buffer)) > 0) {//非阻塞，立刻读取缓冲区可用字节
                                         byte[] data = buffer.array();
                                         // handle
+                                        log.info("handle data");
                                         buffer.clear();
                                     }
                                     if (len == -1) {

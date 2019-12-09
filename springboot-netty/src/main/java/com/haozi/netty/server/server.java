@@ -38,11 +38,11 @@ public class server {
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new DeviceChannelInitializer())
-                .option(ChannelOption.SO_BACKLOG, 8192)
+                .option(ChannelOption.SO_BACKLOG, 8192) // 表示系统用于临时存放已完成三次握手的请求的队列的最大长度,如果连接建立频繁,服务器处理创建新连接较慢,适当调大该参数
                 .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-                .childOption(ChannelOption.SO_REUSEADDR, true)
+                .childOption(ChannelOption.SO_REUSEADDR, true) // 表示端口释放后立即就可以被再次使用,因为一般来说,一个端口释放后会等待两分钟之后才能再被使用
                 .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-                .childOption(ChannelOption.SO_KEEPALIVE, true);
+                .childOption(ChannelOption.SO_KEEPALIVE, true); // 表示是否开启TCP底层心跳机制,true为开启
     }
 
     @PostConstruct

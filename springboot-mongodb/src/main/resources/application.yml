@@ -5,8 +5,8 @@ spring:
     name: springboot-mongodb
   data:
     mongodb:
-      host: localhost
-      port: 27017
+      host: 52.164.124.157
+      port: 9922
       database: admin
 
   # kafka

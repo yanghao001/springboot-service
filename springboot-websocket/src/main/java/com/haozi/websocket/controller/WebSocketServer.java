@@ -28,18 +28,18 @@ public class WebSocketServer {
         sendMessage("connect server succeed！");
     }
 
+    @OnMessage
+    public void onMessage(String message, Session session) {
+        log.info("receive server msg:{}", message);
+        for (WebSocketServer item : webSocketSet) {
+            item.sendMessage(message);
+        }
+    }
+
     @OnClose
     public void onClose() {
         webSocketSet.remove(this);
         log.info("connection is lost , current user sum={}", webSocketSet.size());
-    }
-
-    @OnMessage
-    public void onMessage(String message, Session session) {
-        log.info("receive client msg:{}", message);
-        for (WebSocketServer item : webSocketSet) {
-            item.sendMessage(message);
-        }
     }
 
     @OnError

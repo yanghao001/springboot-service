@@ -54,7 +54,7 @@ public class WebSocketServer {
         try {
             ChannelFuture future = bootstrap.bind(serverConfig.getPort()).addListener((ChannelFutureListener) future1 -> {
                 if (future1.isSuccess()) {
-                    log.info("websocket started.");
+                    log.info("websocket started. and listen port:{}", serverConfig.getPort());
                 }
             }).sync();
 

@@ -109,7 +109,7 @@ public class Jdk8Inaction {
      *
      * */
     @Test
-    private void predicateTest() {
+    public void predicateTest() {
         Predicate<String> p = o -> o.equals("test");
         Predicate<String> g = o -> o.equals("t");
 
@@ -303,5 +303,16 @@ public class Jdk8Inaction {
                 .forEach(System.out::println);
     }
 
+    @Test
+    public void test() {
+        System.out.println(parallelSum(10));
+    }
+
+    public static long parallelSum(long n) {
+        return Stream.iterate(1L, i -> i+1)
+                .limit(n)
+                .parallel()
+                .reduce(0L, Long::sum);
+    }
 
 }

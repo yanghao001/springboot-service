@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 /**
@@ -45,29 +46,30 @@ public class DateUtils {
 
     /**
      * Description:UTC时间转化为本地时间
-     *
+     * @param flag 夏令时标志位 0：夏令时， 1：正常
      * @param utcTime
      * @return
      */
-    public static Date utcToLocal(String utcTime, String timeZone) {
+    public static String utcTimeToLocalTime(String utcTime, int timeZone, int flag) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date utcDate = null;
-        try {
-            utcTime = utcTime + "+" + timeZone;
-            utcDate = sdf.parse(utcTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        sdf.setTimeZone(TimeZone.getDefault());
         Date locatlDate = null;
-        String localTime = sdf.format(utcDate.getTime());
         try {
-            locatlDate = sdf.parse(localTime);
+            utcDate = sdf.parse(utcTime);
+            long timestamp = utcDate.getTime();
+            long timeZoneValue = (long) timeZone * 3600000;
+            long localTimestamp;
+            if (flag == 0) {
+                localTimestamp = timestamp + timeZoneValue + 3600000;
+            } else {
+                localTimestamp = timestamp + timeZoneValue;
+            }
+            locatlDate = new Date(localTimestamp);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return locatlDate;
+        return sdf.format(locatlDate);
     }
 
 }
