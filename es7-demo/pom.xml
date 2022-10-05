@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>7.4.0</version>
+            <version>7.14.0</version>
         </dependency>
         <!-- 在ES客户端启动的时候，必须依赖log4j才能正常执行。是ES客户端必须依赖的jar
         所以，在ES开发中，都会提供一份log4j2.properties。 log4j2.xml
